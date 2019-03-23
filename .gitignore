@@ -7,5 +7,5 @@
 cmake-build-*/
 .idea/*
 out/
-
+*.iml
 
