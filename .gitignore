@@ -4,6 +4,7 @@
 .vscode/launch.json
 .vscode/extensions.json
 .history
+.vscode
 cmake-build-*/
 .idea/*
 out/
