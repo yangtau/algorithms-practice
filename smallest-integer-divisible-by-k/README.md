@@ -1,4 +1,4 @@
-## Problem
+## [Problem](https://leetcode.com/problems/smallest-integer-divisible-by-k/)
 
 Given a positive integer K, you need find the smallest positive integer N such that N is divisible by K, and N only contains the digit 1.
 
@@ -71,9 +71,13 @@ public int smallestRepunitDivByK(int K) {
 ---
 
 And I find a interesting rule.
+
 Let `3` multiply `0` to `9`, we get `0, 3, 6, 9, 2, 5, 8, 1, 4, 7`.
+
 Let `7` multiply `0` to `9`, we get `0, 7, 4, 1, 8, 5, 2, 9, 6, 3`.
+
 Let `1` multiply `0` to `9`, we get `0, 1, 2, 3, 4, 5, 6, 7, 8, 9`.
+
 Let `9` multiply `0` to `9`, we get `0, 9, 8, 7, 6, 5, 4, 3, 2, 1`.
 
 See what we got?
