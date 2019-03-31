@@ -88,7 +88,7 @@ Every result above covers `0` to `9`. And if we remove `0`, the results of `3` a
 
 ## Another Smart Solution
 
-It just thinks the problem in another way. Think about how we do division. We keep add `1` at the end of the `cur`, until `cur%K==0`. And we just keep the part of `cur` not be divisible by `K`.
+It just thinks the problem in another way. Think about how we do division. We keep add `1` at the end of the `cur`, until `cur%K==0`. And we just keep the part of `cur` which  not be divisible by `K`.
 
 ```java
 public int smallestRepunitDivByK(int K) {
