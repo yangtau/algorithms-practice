@@ -1,6 +1,11 @@
 class Solution {
   /*
    * https://leetcode.com/problems/minimum-falling-path-sum/
+   *
+   * The path passes A[i][j] is either from A[i-1][j-1] or A[i-1][j+1]. We can
+   * use dp[i][j] to denote the minimum sum whose path ends at A[i][j]. Then we
+   * get the transition function: dp[i][j] = min(dp[i-1][j-1], dp[i-1][j+1]).
+   *
    */
   public int minFallingPathSum(int[][] A) {
     int len = A.length;

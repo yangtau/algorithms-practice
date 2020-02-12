@@ -2,6 +2,9 @@ import math
 
 
 class Solution:
+    '''
+    https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/
+    '''
     def mctFromLeafValues(self, arr: [int]) -> int:
         return self.dp_solution(arr)
 
