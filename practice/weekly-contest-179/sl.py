@@ -3,6 +3,13 @@ from collections import defaultdict
 
 class Solution:
     def numTimesAllBlue(self, light: [int]) -> int:
+        res, right = 0, 0
+        for i, l in enumerate(light):
+            right = max(right, l)
+            res += 1 if right = i+1 else 0
+        return res
+
+    def numTimesAllBlue0(self, light: [int]) -> int:
         m = len(light) + 1
         on = [False]*m
         blue = [False]*m
@@ -17,8 +24,6 @@ class Solution:
                 while j < m and on[j]:
                     blue[j] = True
                     j += 1
-                # print("on:   ", on[1:])
-                # print("blue: ", blue[1:])
                 if on == blue:
                     res += 1
             i += 1
@@ -47,39 +52,16 @@ class Solution:
             g[nxt].append(f)
 
         def dfs(pos, possi, time, prev):
-            if pos == target:
+            if pos == target and (time == 0 or (len(g[pos])==1 and pos!=1) or (len(g[pos])==0 and pos==1)):
                 return possi
             if time == 0:
                 return 0
             for nxt in g[pos]:
                 if nxt == prev:
                     continue
-                # print(pos, g[pos])
                 tmp = possi * 1/(len(g[pos])-1 if prev != 0 else len(g[pos]))
                 re = dfs(nxt, tmp, time-1, pos)
                 if re != 0:
                     return re
             return 0
         return dfs(1, 1, t, 0)
-
-
-n = 7
-edges = [[1, 2], [1, 3], [1, 7], [2, 4], [2, 6], [3, 5]]
-t = 2
-target = 4
-s = Solution()
-print(s.frogPosition(n, edges, t, target))
-
-t = 1
-target = 7
-
-print(s.frogPosition(n, edges, t, target))
-t = 20
-target = 6
-print(s.frogPosition(n, edges, t, target))
-
-n = 3
-edges = [[2, 1], [3, 2]]
-t = 1
-target = 2
-print(s.frogPosition(n, edges, t, target))
