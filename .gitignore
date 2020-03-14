@@ -1,5 +1,6 @@
 # Created by https://www.gitignore.io/api/java,python,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=java,python,visualstudiocode
+.vscode/
 
 ### Java ###
 # Compiled class file
