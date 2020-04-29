@@ -2,7 +2,6 @@
 #define _HEAPQ_
 #include <stddef.h> /* size_t */
 #include <stdint.h> /* uint8_t */
-#include <stdlib.h> /* malloc free */
 
 #define IDX2PTR(arr, i, sz)                                                    \
   ({                                                                           \
@@ -15,14 +14,15 @@
 #define SWAP(a, b, size)                                                       \
   {                                                                            \
     size_t _size = (size);                                                     \
-    uint8_t *_a = (a);                                                   \
-    uint8_t *_b = (b);                                                   \
+    uint8_t *_a = (a);                                                         \
+    uint8_t *_b = (b);                                                         \
     while (_size--) {                                                          \
       uint8_t _t = *_a;                                                        \
       *_a++ = *_b;                                                             \
       *_b++ = _t;                                                              \
     }                                                                          \
   }
+
 #define PUT(arr, i, x, size)                                                   \
   {                                                                            \
     size_t _sz = (size);                                                       \
@@ -35,7 +35,7 @@
 
 typedef int(cmp_fn)(const void *, const void *);
 
-static void swim(void *const arr, size_t sz, size_t k, cmp_fn cmp) {
+static void swim(void *arr, size_t sz, size_t k, cmp_fn cmp) {
   while (k > 1) {
     void *cur = IDX2PTR(arr, k, sz);
     void *par = IDX2PTR(arr, k / 2, sz);
@@ -48,7 +48,7 @@ static void swim(void *const arr, size_t sz, size_t k, cmp_fn cmp) {
   }
 }
 
-static void sink(void *const arr, size_t sz, size_t k, size_t len, cmp_fn cmp) {
+static void sink(void *arr, size_t sz, size_t k, size_t len, cmp_fn cmp) {
   while (k * 2 <= len) {
     size_t small = k * 2; // left child
     if (small < len       // right exists
@@ -74,18 +74,25 @@ static void sink(void *const arr, size_t sz, size_t k, size_t len, cmp_fn cmp) {
  * @len: length of `arr`
  * @cmp: function pointer to compare elements in `arr`
  **/
-void heapify(void *const arr, size_t sz, size_t len, cmp_fn cmp) {
+void heapify(void *arr, size_t sz, size_t len, cmp_fn cmp) {
   for (size_t i = len / 2; i > 0; i--) {
     sink(arr, sz, i, len, cmp);
   }
 }
 
-void heap_push(void *const arr, size_t sz, const void *x, size_t len,
-               cmp_fn cmp) {
+/* heap_push: push `x` into `arr`
+ * @x: the pointer to the element. `int y; int *x = &y; heap_push(arr, 4, x,
+ *len, cmp)`
+ * @len: length of `arr` before `heap_push`
+ **/
+void heap_push(void *arr, size_t sz, const void *x, size_t len, cmp_fn cmp) {
   PUT(arr, len + 1, x, sz);
   swim(arr, sz, len + 1, cmp);
 }
 
+/* heap_pop: pop the fisrt element in the element, and store it in `arr[len-1]`
+ * @len: length of `arr` before `heap_pop`
+ **/
 void heap_pop(void *const arr, size_t sz, size_t len, cmp_fn cmp) {
   SWAP(IDX2PTR(arr, 1, sz), IDX2PTR(arr, len, sz), sz);
   len -= 1;
@@ -97,7 +104,7 @@ void heap_pop(void *const arr, size_t sz, size_t len, cmp_fn cmp) {
  * @len: length of `arr`
  * @cmp: function pointer to compare elements in `arr`
  **/
-void heap_sort(void *const arr, size_t sz, size_t len, cmp_fn cmp) {
+void heap_sort(void *arr, size_t sz, size_t len, cmp_fn cmp) {
   heapify(arr, sz, len, cmp);
   while (len > 1) {
     SWAP(IDX2PTR(arr, 1, sz), IDX2PTR(arr, len, sz), sz);
